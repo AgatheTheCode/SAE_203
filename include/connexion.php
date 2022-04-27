@@ -7,7 +7,8 @@ function connexion()
 
   if ($pdo) {
     return $pdo;
-  } else {
+  } 
+  else {
     echo '<p>Erreur de connexion</p>';
     exit;
   }
