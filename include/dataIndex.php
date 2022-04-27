@@ -1,0 +1,5 @@
+<?php
+
+$index =[
+    'titre' => 'MegaNerd',
+];

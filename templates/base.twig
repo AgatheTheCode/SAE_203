@@ -1,0 +1,39 @@
+<!DOCTYPE php>
+<php lang="fr">
+<!--
+	Ce fichier php sert de base à tous les modèles en héritant.
+	Il contient les éléments qui seront présents sur toutes les pages du site.
+	En particulier les entêtes php, les header et footer et éventuellement le menu principal
+-->
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{{ titre }}</title>
+	<link rel="stylesheet" href="/base.css">
+	<style> @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap'); </style>
+	{% block css %}
+	{% endblock css %}
+</head>
+
+<body>
+	<header role ="banner">
+
+
+		</div>
+		<nav role ="naviagation">
+		</nav>
+
+	</header>
+		{% block main %}
+		{% endblock main %}
+
+	<footer role = "footer">
+
+		<p class="credits"> @Agathe Dufour ~ 2022 </p>
+		<p class="Plan du site"> Plan du site tmtc </p>
+
+	</footer>
+</body>
+
+</php>
