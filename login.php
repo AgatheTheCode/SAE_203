@@ -27,10 +27,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Check if password is empty
-    if(empty(trim($_POST["mdp_client"]))){
+    if(empty(trim($_POST["mdp"]))){
         $password_err = "Entrez votre mot de passe.";
     } else{
-        $password = trim($_POST["mdp_client"]);
+        $password = trim($_POST["mdp"]);
     }
     
     // Validate credentials
@@ -59,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
+                            $_SESSION["id_client"] = $id;
                             $_SESSION["pseudo_client"] = $username;                            
                             
                             // Redirect user to welcome page
@@ -117,7 +117,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>    
             <div class="form-group">
                 <label>Mot de Passe</label>
-                <input type="password" name="mdp_client" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                <input type="password" name="mdp" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
