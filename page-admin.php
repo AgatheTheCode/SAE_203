@@ -14,39 +14,40 @@ $param_image_categorie = $param_description_categorie = $param_nom_categorie = "
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
-    //validation du nom de la catégorie
-    if(empty($_POST["nom_categorie"])){
-        $nom_categorie_err = "Nom invalide";
-    } 
-    /*elseif(!preg_match('/^[a-zA-Z0-9_]+$/', ($_POST['nom_categorie']))){
-        $nom_categorie_err="Un nom de categorie ne peut-être composer que de lettres, chiffres et underscores";*/
-    }
-    else{
-        //requête ajout du nom
-        $sql = "SELECT nom_categorie FROM categorie WHERE nom_categorie = :nom_categorie";
 
-        if($stmt = $pdo->prepare($sql)){
-            $stmt->bindParam(":nom_categorie", $param_nom_categorie, PDO::PARAM_STR);
-
-            $param_nom_categorie = $_POST["nom_categorie"];
-
-            //verification que la nouvelle categorie n'existe pas
-
-            if($stmt->execute()){
-                if($stmt->rowCount()==1){
-                    $nom_categorie_err = "Une catégorie avec le même nom existe déjà !";
-                } 
-                else{
-                    $nom_categorie = $_POST["nom_categorie"];
+        //validation de la description de la catégorie
+        if(empty($_POST["nom_categorie"])){
+            $nom_categorie_err = "Nom invalide";
+        } 
+       /* elseif(!preg_match('/^[a-zA-Z0-9_]+$/', ($_POST['description_categorie']))){
+            $description_categorie_err="Une description de categorie ne peut-être composer que de lettres, chiffres et underscores";
+        }*/
+        else{
+            //requête ajout de la description
+            $sql = "SELECT nom_categorie FROM categorie WHERE nom_categorie = :nom_categorie";
+    
+            if($stmt = $pdo->prepare($sql)){
+                $stmt->bindParam(":nom_categorie", $param_nom_categorie, PDO::PARAM_STR);
+    
+                $param_description_categorie = $_POST["nom_categorie"];
+    
+                //verification que la nouvelle categorie n'existe pas
+    
+                if($stmt->execute()){
+                    if($stmt->rowCount()==1){
+                        $nom_categorie_err = "Une catégorie avec le même nom existe déjà !";
+                    } 
+                    else{
+                        $nom_categorie = $_POST["nom_categorie"];
+                    }
                 }
             }
         }
-    }
     
 
         //validation de la description de la catégorie
         if(empty($_POST["description_categorie"])){
-            $description_categorie_err = "Nom invalide";
+            $description_categorie_err = "Description invalide";
         } 
        /* elseif(!preg_match('/^[a-zA-Z0-9_]+$/', ($_POST['description_categorie']))){
             $description_categorie_err="Une description de categorie ne peut-être composer que de lettres, chiffres et underscores";
@@ -76,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     //validation de la description de l'image de la categorie
     if(empty($_POST["image_categorie"])){
-        $image_categorie_err = "Nom invalide";
+        $image_categorie_err = "Image invalide";
     } 
     /*elseif(!preg_match('/^[a-zA-Z0-9_]+$/', ($_POST['image_categorie']))){
         $image_categorie_err="Une description de categorie ne peut-être composer que de lettres, chiffres et underscores";
