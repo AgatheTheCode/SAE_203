@@ -5,7 +5,7 @@ function admin_insert_categorie()
     $pdo = connexion();
 
     // initialisation des variables
-$image_categorie = $nom_categorie = $image_categorie = $description_categorie ="";
+$image_categorie = $nom_categorie = $description_categorie ="";
 $param_image_categorie = $param_description_categorie = $param_nom_categorie = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -130,6 +130,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     }
 }
 }
+
+
 function login_client(){
     // Initialize the session
 session_start();
