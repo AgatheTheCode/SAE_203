@@ -9,6 +9,6 @@ include_once('include/function.php');
 admin_insert_categorie();
 
 echo $twig->render('page-admin.twig', [
-    'categorie' => $categorie,
+    'cat' => $cat,
+    'item' =>$cat
 ]);
-?>

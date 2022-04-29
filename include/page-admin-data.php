@@ -1,34 +1,34 @@
 <?php
-$categorie =[
-    ['titre' =>'Ajouter une catégorie', 'formulaire' => [
+$cat =
+[
+    ['titre' =>'Ajouter une catégorie','phpaction' => '"<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"', 'form' =>[
 
-    ['action' =>'<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">', 
-    'nom' =>'Nom Catégorie',
-    'input' =>'type="text" name="nom_categorie" class="form-control <?php echo (!empty($nom_categorie_err)) ? \'is-invalid\' : \'\'; ?>" value="<?php echo $nom_categorie; ?>"',
-    'invalid_feeback' =>'$nom_categorie_err; ?>',],
-    ['action' =>'<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">', 
-    'nom' =>'Description Catégorie',
-    'input' =>'type="text" name="description_categorie" class="form-control <?php echo (!empty($nom_categorie_err)) ? \'is-invalid\' : \'\'; ?>" value="<?php echo $description_categorie; ?>"',
-    'invalid_feeback' =>'$description_categorie_err; ?>',],
-    ['action' =>'<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">', 
-    'nom' =>'Image Catégorie',
-    'input' =>'type="text" name="image_categorie" class="form-control <?php echo (!empty($image_categorie_err)) ? \'is-invalid\' : \'\'; ?>" value="<?php echo $image_categorie; ?>"',
-    'invalid_feeback' =>'$image_categorie_err; ?>'],
-    ] ],
+        
+        ['nom' => 'Nom de la catégorie', 'phpspan' => '<?php echo $nom_categorie_err; ?>'],
+        ['phpinput' => ' type="text" name="nom_categorie" class="form-control "<?php echo (!empty($nom_categorie_err)) ? \'is-invalid\' : \'\'; ?>" value= <?php echo $nom_categorie; ?>.'],
+        ['phpspan' => '<?php echo $description_categorie_err; ?>'],
 
-    ['titre' =>'Ajouter un genre', 'formulaire' => [
+        /*['nom' => 'Description de la catégorie', 'phpspan' => '<?php echo $description_categorie_err; ?>'],
+        ['phpinput' => '<?php echo (!empty($description_categorie_err)) ? \'is-invalid\' : \'\'; ?>" value=".<?php echo $description_categorie; ?>." '],
 
-        ['action' =>'<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">', 
-        'nom' =>'Nom Catégorie',
-        'input' =>'type="text" name="nom_categorie" class="form-control <?php echo (!empty($nom_categorie_err)) ? \'is-invalid\' : \'\'; ?>" value="<?php echo $nom_categorie; ?>"',
-        'invalid_feeback' =>'$nom_categorie_err; ?>',],
-        ['action' =>'<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">', 
-        'nom' =>'Description Catégorie',
-        'input' =>'type="text" name="description_categorie" class="form-control <?php echo (!empty($nom_categorie_err)) ? \'is-invalid\' : \'\'; ?>" value="<?php echo $description_categorie; ?>"',
-        'invalid_feeback' =>'$description_categorie_err; ?>',],
-        ['action' =>'<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">', 
-        'nom' =>'Image Catégorie',
-        'input' =>'type="text" name="image_categorie" class="form-control <?php echo (!empty($image_categorie_err)) ? \'is-invalid\' : \'\'; ?>" value="<?php echo $image_categorie; ?>"',
-        'invalid_feeback' =>'$image_categorie_err; ?>'],
-    ] ],
+        ['nom' => 'Lien de l\'image de la catégorie', 'phpspan' => '<?php echo $description_categorie_err; ?>'],
+        ['phpinput' => '<?php echo (!empty($image_categorie_err)) ? \'is-invalid\' : \'\'; ?>" value="<?php echo $image_categorie; ?>"'],*/
+]
+] ,
+    ['titre' =>'Ajouter un genre','phpaction' => '"<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"', 'form' =>[
+
+        
+        ['nom' => 'Nom de la catégorie', 'phpspan' => '<?php echo $nom_categorie_err; ?>'],
+        ['phpinput' => ' type="text" name="nom_categorie" class="form-control "<?php echo (!empty($nom_categorie_err)) ? \'is-invalid\' : \'\'; ?>" value= <?php echo $nom_categorie; ?>.'],
+
+        /*['nom' => 'Description de la catégorie', 'phpspan' => '<?php echo $description_categorie_err; ?>'],
+        ['phpinput' => '<?php echo (!empty($description_categorie_err)) ? \'is-invalid\' : \'\'; ?>" value=".<?php echo $description_categorie; ?>." '],
+        */
+
+        /*['nom' => 'Lien de l\'image de la catégorie', 'phpspan' => '<?php echo $description_categorie_err; ?>'],
+        ['phpinput' => '<?php echo (!empty($image_categorie_err)) ? \'is-invalid\' : \'\'; ?>" value="<?php echo $image_categorie; ?>"'],
+          */
+        ] 
+    ]
+    
 ];

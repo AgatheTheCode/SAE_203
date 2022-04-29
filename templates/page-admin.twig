@@ -5,18 +5,21 @@
 
     <div class="wrapper">
 
-    {% for items in categorie %}
+    {% for element in cat %}
 
-        <h2>{{items.titre}}</h2>
-    {% for elements in categorie.formulaire %}
+        <h2>{{element.titre}}</h2>
+
+        <form action={{element.phpaction}} method="post">
   
-        <form action="{{elements.action}}">
             <div class="form-group">
-                <label>{{ elements.nom }}</label>
-                <input {{ elements.input }}>
-                <span class="invalid-feedback">{{elements.invalid_feedback}}</span>
-            </div>
-    {% endfor %}
+                {% for item in element.form %}
+                <label>{{item.nom}}</label>
+                <input type="text" name="description_categorie" class="form-control"{{item.phpinput}}></input>
+                <span class="invalid-feedback">{{item.phpspan}}</span>
+                {% endfor %}
+            </div> 
+
+
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-secondary ml-2" value="Reset">
