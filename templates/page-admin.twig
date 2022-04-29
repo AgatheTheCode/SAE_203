@@ -4,18 +4,17 @@
 <body>
 
     <div class="wrapper">
-                <pre> {{dump(cat)}} </pre>
+                {# <pre> {{dump(cat)}} </pre>  #}
 
     {% for element in cat %}
 
         <h2>{{element.titre}}</h2>
 
         <form action={{element.phpaction}} method="post">
-  
             <div class="form-group">
                 {% for item in element.form %}
                 <label>{{item.nom}}</label>
-                <input type="text" name="description_categorie" class="form-control"{{item.phpinput}}></input>
+                <input class="form-control"{{item.phpinput}}></input>
                 <span class="invalid-feedback">{{item.phpspan}}</span>
                 {% endfor %}
             </div> 
@@ -25,8 +24,10 @@
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-secondary ml-2" value="Reset">
             </div>
+                
         </form>
-    {% endfor %}
-    </div>    
+   {% endfor %}  
+    </div>  
+ 
 </body>
 {% endblock main %}
