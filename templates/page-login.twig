@@ -3,8 +3,10 @@
 {% block main %}
 <!DOCTYPE html>
 <body>
+
     <div class="wrapper">
-        <h2>{{Login.login}}</h2>
+        <h2>{{Login.h2}}</h2>
+            <pre> {{dump(Login)}} </pre>
         <p>{{Login.info}}</p>
 
         {{Login.phperr}}
@@ -12,18 +14,18 @@
         <form {{ Login.form }}>
             <div class="form-group">
                 <label>Pseudo</label>
-                <input type="text" name="pseudo_client" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
+                <input class="form-control" {{ Login.input}}>
                 <span class="invalid-feedback">{{Login.username_err}}</span>
             </div>    
             <div class="form-group">
                 <label>Mot de Passe</label>
-                <input type="password" name="mdp" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                <input class="form-control" {{input_mdp}}>
                 <span class="invalid-feedback">{{ Login.mdp_err }}</span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            <p>Don't have an account? <a href="connexion.php">Sign up now</a>.</p>
+            <p>Don't have an account? <a href="creation_compte.php">Sign up now</a>.</p>
         </form>
     </div>
 </body>
