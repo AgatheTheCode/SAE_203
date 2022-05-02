@@ -136,7 +136,7 @@ function login_client(){
     // Initialize the session
 session_start();
  
-// Check if the user is already logged in, if yes then redirect him to welcome page
+// Verification que le client n'est pas déja logged in
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: welcome.php");
     exit;
@@ -146,66 +146,67 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 require_once('include/config.php');
 $pdo = connexion();
  
-// Define variables and initialize with empty values
+// initialisation des variable vides
 $username = $password = "";
-$username_err = $password_err = $login_err = "";
- 
-// Processing form data when form is submitted
+$username_err = $password_err = $login_err =""; 
+
+
+// Process des donneés du form
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
-    // Check if username is empty
+    // pseudo vide?
     if(empty(trim($_POST["pseudo_client"]))){
         $username_err = "Entrez votre pseudo.";
     } else{
         $username = trim($_POST["pseudo_client"]);
     }
     
-    // Check if password is empty
+    // mdp vide?
     if(empty(trim($_POST["mdp"]))){
         $password_err = "Entrez votre mot de passe.";
     } else{
         $password = trim($_POST["mdp"]);
     }
     
-    // Validate credentials
+    // VERIFICATION DES INFOS FORMULAIRES
     if(empty($username_err) && empty($password_err)){
-        // Prepare a select statement
+        // Requête
         $sql = "SELECT id_client, pseudo_client, mdp_client FROM client WHERE pseudo_client = :pseudo_client";
         
         if($stmt = $pdo->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
+            // Liaison des variables
             $stmt->bindParam(":pseudo_client", $param_username, PDO::PARAM_STR);
             
             // Set parameters
             $param_username = trim($_POST["pseudo_client"]);
             
-            // Attempt to execute the prepared statement
+            // execution de $stmt (statement  = déclaration en français)
             if($stmt->execute()){
-                // Check if username exists, if yes then verify password
+                // Verifie client, si oui verify mdp
                 if($stmt->rowCount() == 1){
                     if($row = $stmt->fetch()){
                         $id = $row["id_client"];
                         $username = $row["pseudo_client"];
                         $hashed_password = $row["mdp_client"];
                         if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
+                            // mdp correct
                             session_start();
                             
-                            // Store data in session variables
+                            // stock des donneées dans les varaibles
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id_client"] = $id;
                             $_SESSION["pseudo_client"] = $username;                            
                             
-                            // Redirect user to welcome page
-                            header("location: welcome.php");
+                            // Redirection de l'utilisateur si connexion OK
+                            header("location: index.php");
                         } else{
-                            // Password is not valid, display a generic error message
-                            $login_err = "Invalid username or password.";
+                            // mot de passe n'est pas valide
+                            $password_err = "Invalid username or password.";
                         }
                     }
                 } else{
-                    // Username doesn't exist, display a generic error message
-                    $login_err = "Invalid username or password.";
+                    // Nom d'utilisateur n'existe pas
+                    $password_err = "Invalid username or password.";
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -227,8 +228,8 @@ require_once('include/config.php');
 $pdo = connexion();
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$username = $password = $confirm_password = "test";
+$username_err = $password_err = $confirm_password_err = "test";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -303,7 +304,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Redirect to login page
-                header("location: login.php");
+                //header("location: login.php");
+                echo "done";
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             }
@@ -316,4 +318,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Close connection
     unset($pdo);
 }}
+}
+
+function top_vente()
+{
+
+
+    require_once('include/config.php');
+    $pdo = connexion();
+
+    //variables vides
+    $prix_produit = "";
+
+    $sql = ("SELECT avg(prix_produit) AS moyenne FROM produit");
+    
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue('prix_produit', $prix_produit, PDO::PARAM_INT);
+
+    $stmt->execute();
+
+    echo($stmt);
+
 }

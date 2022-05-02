@@ -10,5 +10,5 @@ admin_insert_categorie();
 
 echo $twig->render('page-admin.twig', [
     'cat' => $cat,
-    'item' =>$cat
+ 
 ]);

@@ -10,13 +10,6 @@ login_client();
 
 
 
-/*echo $twig->render('page-login.twig', [
-
-    $Login = 'Login'
-
-]);*/
-
-// pas besoin de twig cette page car unique
 ?>
  
 <!DOCTYPE html>
@@ -25,10 +18,7 @@ login_client();
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding: 20px; }
-    </style>
+
 </head>
 <body>
     <div class="wrapper">
@@ -45,17 +35,17 @@ login_client();
             <div class="form-group">
                 <label>Pseudo</label>
                 <input type="text" name="pseudo_client" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
-                <span class="invalid-feedback"><?php echo $username_err; ?></span>
+                <span class="invalid-feedback"><?php var_dump($username_err); ?></span>
             </div>    
             <div class="form-group">
                 <label>Mot de Passe</label>
-                <input type="password" name="mdp" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
-                <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                <input type="mdp_client" name="mdp" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                <span class="invalid-feedback"><?php var_dump($password_err); ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            <p>Don't have an account? <a href="connexion.php">Sign up now</a>.</p>
+            <p>Vous n'avez pas de compte client? <a href="connexion.php">Enregistrez vous maintenant !</a>.</p>
         </form>
     </div>
 </body>

@@ -1,1 +1,39 @@
 {% extends "base.twig" %}
+{% block main %}
+       <main role ='main'>
+
+            <section class="S1">
+                <h2>{{index.titre}}</h2>
+                <h3>{{index.apropos}}</h3>
+                <aside>
+                    <a href={{index.href_lang}}>{{index.aside}}</a>
+                    <!--Mettre liens plus tard vers eng-->
+                </aside>
+                <article class="articleI">
+                    <h4 class="presentation">{{index.titre2}}.</h4>
+                    <p> {{index.presentation}}
+                </article>
+            </section>
+
+
+            <section class="carrouselMain">
+                 <h3> {{index.titreflag}}</h3>
+                <div> 
+                    <ul class="items">
+                    {% for element in carrousel %}
+                      <li class="sousItem">
+                        <div>
+                            <img src={{element.flag}} alt={{element.alt}}>
+                        <div class="infosup">
+                            <p> {{element.infol}} </p>
+                        </div>
+                </div>
+                     </li>
+        {% endfor %}
+    </ul>
+ </div> 
+ </div>
+            </section>
+        </main>
+
+{% endblock main %}
