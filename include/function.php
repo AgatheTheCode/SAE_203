@@ -1,5 +1,7 @@
 
 <?php
+//////////////////////////////////////////////////////////////////
+
 function admin_insert_categorie()
 {
     $pdo = connexion();
@@ -131,6 +133,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 }
 }
 
+//////////////////////////////////////////////////////////////////
 
 function login_client(){
     // Initialize the session
@@ -221,6 +224,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     unset($pdo);
 }
 }
+//////////////////////////////////////////////////////////////////
 
 function create_account(){
     // Include config file
@@ -320,7 +324,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }}
 }
 
-function top_vente()
+//////////////////////////////////////////////////////////////////
+/*function top_vente()
 {
 
 
@@ -328,15 +333,100 @@ function top_vente()
     $pdo = connexion();
 
     //variables vides
-    $prix_produit = "";
+    $prix_produit = $moyenne = "";
 
-    $sql = ("SELECT avg(prix_produit) AS moyenne FROM produit");
+    $sql = ("SELECT avg(prix_produit) AS moyenne FROM produits");
     
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue('prix_produit', $prix_produit, PDO::PARAM_INT);
+    $stmt->bindValue('moyenne', $prix_produit, PDO::PARAM_INT);
 
     $stmt->execute();
 
     echo($stmt);
 
+}*/
+
+////////////////////////////////////////////////////////////
+function filtre($pdo)
+//filtre
+{
+    require_once('include/config.php');
+    $pdo = connexion();
+
+    $filtre = [];
+
+    $sql = 'select * from produit';
+    $flag= 0;
+        //var_dump($filtre);
+        foreach($filtre as $f){
+    if ($f['value'] == 1){
+        if ($flag == 0){
+            $sql = $sql." where id_categorie = '". $f['id']."'";
+            $flag = 1;
+      } 
+        if ($flag == 1){
+        $sql = $sql." OR id_categorie ='".$f['id']."'";
+      }
+    }
+    if ($f['value']== 0){
+      $sql = $sql;
+    }
+  }
+//var_dump($sql);
+  // préparation et exécution de la requête
+$query = $pdo->prepare($sql);
+$query->execute();
+
+  // vérification des erreurs
+  if ($query->errorCode() == '00000') {
+    // récupération des données dans un tableau
+    $tableau = $query->fetchALL(PDO::FETCH_ASSOC);
+  } else {
+    echo '<p>Erreur dans la requête : ' . $query->errorInfo()[2] . '</p>';
+    $tableau = null;
+  }
+  // renvoie le tableau
+  //var_dump($tableau);
+  return $tableau;
+
+  unset($pdo);
 }
+
+ ///////////////////////////////////////////////////////
+/*function traitement_filtre(){
+
+    require_once('include/config.php');
+    $pdo = connexion();
+
+     //traitement formulaire
+
+var_dump($_POST);
+$filtre = [];
+
+if(isset($_POST['trier'])) 
+{
+  if(isset ($_POST['T-shirt'])){
+    $filtre[0]= array ('name'=> $_POST['T-shrit'], 'value' => 1);
+  }
+  else{
+    $filtre[0]= array ('value' => 0);
+  }
+
+  if(isset ($_POST['Pins'])){
+    $filtre[1]= array ('name'=> $_POST['Pins'], 'value' => 1);
+  }
+  else{
+    $filtre[1]= array ('value' => 0);
+  }
+
+  if(isset ($_POST['Sweat'])){
+    $filtre[2]= array ('name'=> $_POST['Sweat'], 'value' => 1);
+  }
+  else{
+    $filtre[2]= array ('value' => 0);
+  }
+
+}
+
+unset($pdo);
+ }*/

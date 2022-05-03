@@ -1,15 +1,5 @@
 <?php
 
-// Initialise Twig
-include('include/twig.php');
-$twig = init_twig();
-
-// Connexion à la base de données
-include_once('include/config.php');
-$pdo = connexion();
-include_once('include/function.php');
-top_vente();
-
 ?>
 
 <!DOCTYPE HTML>
@@ -23,7 +13,6 @@ top_vente();
             @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
         </style>
     </head>
-        <p><?php  var_dump($stmt) ?></p>
     <body>
         <header>
             <div class="titre">
@@ -49,84 +38,84 @@ top_vente();
 
             <section class="formulaire">
                 <article class="articleI">
-                    <form>
+                    <form method="post" action="produits.php" >
                         <h3>Catégorie de produit</h3>
                         <div>
-                            <input type="checkbox" id="tshirt" name="T-shirt">
+                            <input type="checkbox" value="T-shirt" name="T-shirt">
                             <label for="categorie">T-shirt</label>
                         </div>
                         <div>
-                            <input type="checkbox" id="Pins" name="Pins">
+                            <input type="checkbox" value="Pins" name="Pins">
                             <label for="categorie">Pins</label>
                         </div>
                         <div>
-                            <input type="checkbox" id="Tasses" name="Tasses">
+                            <input type="checkbox" value="Tasses" name="Tasses">
                             <label for="categorie">Tasse</label>
                         </div>
                         <div>
-                            <input type="checkbox" id="Stickers" name="Stickers">
+                            <input type="checkbox" value="Stickers" name="Stickers">
                             <label for="categorie">Stickers</label>
                         </div>
                         <div>
-                            <input type="checkbox" id="Sweat" name="Sweat">
+                            <input type="checkbox" value="Sweat" name="Sweat">
                             <label for="categorie">Sweat</label>
                         </div>
                         <div>
-                            <input type="checkbox" id="Lunettes" name="Lunettes">
+                            <input type="checkbox" value="Lunettes" name="Lunettes">
                             <label for="categorie">Lunettes</label>
                         </div>
                         <div>
-                            <input type="checkbox" id="cnsrtr" name="cnsrtr">
+                            <input type="checkbox" value="console_retro" name="console_retro">
                             <label for="categorie">Console Rétro</label>
                         </div>
 
                         <h3>Genre de produit</h3>
                         <div>
-                            <input type="radio" id="" name="">
-                            <label for=""></label>
+                            <input type="radio" value="cyberpunk" name="cyberpunk">
+                            <label for="genre">cyberpunk</label>
                         </div>
                         <div>
-                            <input type="radio" id="" name="">
-                            <label for=""></label>
+                            <input type="radio" value="retro" name="retro">
+                            <label for="genre">retro</label>
                         </div>
                         <div>
-                            <input type="radio" id="" name="">
-                            <label for=""></label>
+                            <input type="radio" value="steampunk" name="steampunk">
+                            <label for="genre">steampunk</label>
                         </div>
                         <div>
-                            <input type="radio" id="" name="">
-                            <label for=""></label>
+                            <input type="radio" value="fps" name="fps">
+                            <label for="genre">fps</label>
                         </div>
                         <div>
-                            <input type="radio" id="" name="">
-                            <label for=""></label>
+                            <input type="radio" value="simulation" name="simulation">
+                            <label for="genre">simulation</label>
                         </div>
                         <div>
-                            <input type="radio" id="" name="">
-                            <label for=""></label>
+                            <input type="radio" value="mmo" name="mmo">
+                            <label for="genre">mmo</label>
                         </div>
                         <div>
-                            <input type="radio" id="" name="">
-                            <label for=""></label>
+                            <input type="radio" value="sony" name="sony">
+                            <label for="genre">sony</label>
                         </div>
                         <div>
-                            <input type="radio" id="" name="">
-                            <label for=""></label>
+                            <input type="radio" value="sega" name="sega">
+                            <label for="genre">sega</label>
                         </div>
                         <div>
-                            <input type="radio" id="" name="">
-                            <label for=""></label>
+                            <input type="radio" value="metr valuevania" name="metr valuevania">
+                            <label for="genre">metr valuevania</label>
                         </div>
                         <div>
-                            <input type="radio" id="" name="">
-                            <label for=""></label>
+                            <input type="radio" value="rts" name="rts">
+                            <label for="genre">rts</label>
                         </div>
                         <div>
-                            <input type="radio" id="" name="">
-                            <label for=""></label>
+                            <input type="radio" value="space_shooter" name="space_shooter">
+                            <label for="genre">space shooter</label>
                         </div>
                         <div class="formulaire">
-                            <input type="submit" value="Trier">
+                            <input type="submit" name="trier">
                         </div>
                     </form>
                 </article>

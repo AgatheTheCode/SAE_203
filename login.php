@@ -9,7 +9,6 @@ include_once('include/function.php');
 login_client();
 
 
-
 ?>
  
 <!DOCTYPE html>

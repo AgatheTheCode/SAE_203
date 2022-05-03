@@ -1,0 +1,42 @@
+            {% extends "base.twig" %}
+
+{% block main %}
+            <pre> <?php var_dump($categorie) ?> </pre>
+            <section class="formulaire">
+                <article class="articleI">
+                    <form>
+                        <h3>{{titre.titre1}}</h3>
+                        {% for element in  categorie %}
+                        <div>
+                            <input type="checkbox" value="{{element.name}}" name="{{element.id}}">
+                            <label for="categorie">{{element.name}}</label>
+                        </div>
+                        {% endfor %}
+                        <h3>{{titre.titre2}}</h3>
+                        {% for item in genre %}
+                        <div>
+                            <input type="radio" value="{{item.name}}" name="{{item.id}}">
+                            <label for="genre">{{item.name}}</label>
+                        </div>
+                        {% endfor %}
+                        <div class="formulaire">
+                            <input type="submit" name="trier">
+                        </div>
+                    </form>
+                </article>
+            </section>
+
+            <section>
+                <article>
+                        <h3> Résultat de la recherche </h3>
+                        {% for produit in produit %}
+
+                        <p>{{produit.nom_produit}}</p>
+
+                        {% endfor %}
+                </article>
+            </section>
+
+            {% endblock main %}
+
+
