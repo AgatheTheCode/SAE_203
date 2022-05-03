@@ -13,6 +13,7 @@ $categorie =[
     ['name' => 'Sweat','id' => '14'],
     ['name' => 'Lunettes','id' => '15'],
     ['name' => 'Console_Rétro','id' => '16'],
+    
 ];
 
 $genre =[
@@ -28,8 +29,4 @@ $genre =[
     ['name' => 'mmo'],
     ['name' => 'space_shooters'],
     ['name' => 'metroidvania'],
-];
-
-$produit =[
-
 ];

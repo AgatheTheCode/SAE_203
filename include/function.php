@@ -324,30 +324,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }}
 }
 
-//////////////////////////////////////////////////////////////////
-/*function top_vente()
-{
-
-
-    require_once('include/config.php');
-    $pdo = connexion();
-
-    //variables vides
-    $prix_produit = $moyenne = "";
-
-    $sql = ("SELECT avg(prix_produit) AS moyenne FROM produits");
-    
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue('moyenne', $prix_produit, PDO::PARAM_INT);
-
-    $stmt->execute();
-
-    echo($stmt);
-
-}*/
-
 ////////////////////////////////////////////////////////////
-function filtre($pdo)
+
+function filtre()
 //filtre
 {
     require_once('include/config.php');
@@ -356,79 +335,45 @@ function filtre($pdo)
     $filtre = [];
 
     $sql = 'SELECT * from produit INNER JOIN categorie ON produit.id_categorie = categorie.id_categorie';
-    $flag= 0;
 
     // exemple SELECT * from produit INNER JOIN categorie ON produit.id_categorie = categorie.id_categorie WHERE nom_categorie = 'sweat'; 
         //var_dump($filtre);
-        foreach($filtre as $f){
-    if ($f['value'] == 1){
-        if ($flag == 0){
-            $sql = $sql." where nom_categorie = '". $f['name']."'";
+        foreach($filtre as $f)
+        {
+    if ($f['value'] == 1)
+    {
+        if ($flag == 0)
+        {
+            $sql = $sql." where id_categorie = '". $f['name']."'";
             $flag = 1;
-      } 
-        if ($flag == 1){
-        $sql = $sql." OR nom_categorie ='".$f['name']."'";
-      }
+        } 
+        if ($flag == 1)
+        {
+        $sql = $sql." OR id_categorie ='".$f['name']."'";
+        }
     }
+
     if ($f['value']== 0){
-      $sql = $sql;
+        $sql = $sql;
     }
-  }
+        }
 var_dump($sql);
   // préparation et exécution de la requête
 $query = $pdo->prepare($sql);
 $query->execute();
 
   // vérification des erreurs
-  if ($query->errorCode() == '00000') {
+        if ($query->errorCode() == '00000') {
     // récupération des données dans un tableau
     $tableau = $query->fetchALL(PDO::FETCH_ASSOC);
-  } else {
+    }
+        else {
     echo '<p>Erreur dans la requête : ' . $query->errorInfo()[2] . '</p>';
     $tableau = null;
-  }
+            }
   // renvoie le tableau
   //var_dump($tableau);
-  return $tableau;
-
-  unset($pdo);
-}
-
- ///////////////////////////////////////////////////////
-/*function traitement_filtre(){
-
-    require_once('include/config.php');
-    $pdo = connexion();
-
-     //traitement formulaire
-
-var_dump($_POST);
-$filtre = [];
-
-if(isset($_POST['trier'])) 
-{
-  if(isset ($_POST['T-shirt'])){
-    $filtre[0]= array ('name'=> $_POST['T-shrit'], 'value' => 1);
-  }
-  else{
-    $filtre[0]= array ('value' => 0);
-  }
-
-  if(isset ($_POST['Pins'])){
-    $filtre[1]= array ('name'=> $_POST['Pins'], 'value' => 1);
-  }
-  else{
-    $filtre[1]= array ('value' => 0);
-  }
-
-  if(isset ($_POST['Sweat'])){
-    $filtre[2]= array ('name'=> $_POST['Sweat'], 'value' => 1);
-  }
-  else{
-    $filtre[2]= array ('value' => 0);
-  }
-
-}
+        return $tableau;
 
 unset($pdo);
- }*/
+}

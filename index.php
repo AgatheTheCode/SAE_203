@@ -24,11 +24,10 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Menu</a></li>
-                    <li><a href="bibliographie.html">Nos produits</a></li>
-                    <li><a href="contact.html">Compte</a></li>
-                    <li><a href="contact.html">Page Administration</a></li>
-                    <li><a href="contact.html">Compte</a></li>
+                    <li><a href="index.php">Menu</a></li>
+                    <li><a href="produits.php">Nos produits</a></li>
+                    <li><a href="compte.php">Compte</a></li>
+                    <li><a href="page-admin.php">Page Administration</a></li>
                 </ul>
             </nav>
 
