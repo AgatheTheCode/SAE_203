@@ -12,7 +12,7 @@ $categorie =[
     ['name' => 'Stickers','id' => '13'],
     ['name' => 'Sweat','id' => '14'],
     ['name' => 'Lunettes','id' => '15'],
-    ['name' => 'Console Rétro','id' => '16'],
+    ['name' => 'Console_Rétro','id' => '16'],
 ];
 
 $genre =[

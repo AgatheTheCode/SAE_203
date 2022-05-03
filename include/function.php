@@ -355,24 +355,26 @@ function filtre($pdo)
 
     $filtre = [];
 
-    $sql = 'select * from produit';
+    $sql = 'SELECT * from produit INNER JOIN categorie ON produit.id_categorie = categorie.id_categorie';
     $flag= 0;
+
+    // exemple SELECT * from produit INNER JOIN categorie ON produit.id_categorie = categorie.id_categorie WHERE nom_categorie = 'sweat'; 
         //var_dump($filtre);
         foreach($filtre as $f){
     if ($f['value'] == 1){
         if ($flag == 0){
-            $sql = $sql." where id_categorie = '". $f['id']."'";
+            $sql = $sql." where nom_categorie = '". $f['name']."'";
             $flag = 1;
       } 
         if ($flag == 1){
-        $sql = $sql." OR id_categorie ='".$f['id']."'";
+        $sql = $sql." OR nom_categorie ='".$f['name']."'";
       }
     }
     if ($f['value']== 0){
       $sql = $sql;
     }
   }
-//var_dump($sql);
+var_dump($sql);
   // préparation et exécution de la requête
 $query = $pdo->prepare($sql);
 $query->execute();

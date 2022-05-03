@@ -8,7 +8,7 @@
                         <h3>{{titre.titre1}}</h3>
                         {% for element in  categorie %}
                         <div>
-                            <input type="checkbox" value="{{element.name}}" name="{{element.id}}">
+                            <input type="checkbox" value="{{element.name}}" name="{{element.name}}">
                             <label for="categorie">{{element.name}}</label>
                         </div>
                         {% endfor %}
@@ -29,9 +29,9 @@
             <section>
                 <article>
                         <h3> Résultat de la recherche </h3>
-                        {% for produit in produit %}
+                        {% for element in produit %}
 
-                        <p>{{produit.nom_produit}}</p>
+                        <p>{{element.nom_produit}}</p>
 
                         {% endfor %}
                 </article>
