@@ -1,0 +1,24 @@
+            {% extends "base.twig" %}
+
+{% block main %}
+            <section>
+                <article>
+                        <h3> Détail : {{produit.nom_produit}} </h3>
+                        {% for element in produit %}
+
+        <ul class="ListeN1">
+            <li class ="ListeN2">{{ element.nom_produit }}</a></li>
+            <li><img src"{{element.image_produit}}" alt""></li>
+            <li>Genre :{{ element.nom_genre }} </li>
+            <li>Categorie :{{ element.nom_categorie }} </li>
+            <li>Note :{{ element.note }} </li>
+            <li>Prix :{{ element.prix_produit }} </li>
+        </ul>
+
+                        {% endfor %}
+                </article>
+
+            </section>
+
+            {% endblock main %}
+

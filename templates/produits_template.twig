@@ -1,35 +1,15 @@
             {% extends "base.twig" %}
 
 {% block main %}
-            <section class="formulaire">
-                <article class="articleI">
-                    <form methode="post" action="produits.php">
-                        <h3>{{titre.titre1}}</h3>
-                        {% for element in  categorie %}
-                        <div>
-                            <input type="checkbox" value="{{element.name}}" name="{{element.id}}">
-                            <label for="categorie">{{element.name}}</label>
-                        </div>
-                        {% endfor %}
-                        <h3>{{titre.titre2}}</h3>
-                        {% for item in genre %}
-                        <div>
-                            <input type="radio" value="{{item.name}}" name="{{item.name}}">
-                            <label for="genre">{{item.name}}</label>
-                        </div>
-                        {% endfor %}
-                        <div class="formulaire">
-                            <input type="submit" name="trier">
-                        </div>
-                    </form>
-                </article>
-            </section>
             <section>
                 <article>
                         <h3> Résultat de la recherche </h3>
-                        {% for produit in produit %}
+                        {% for element in produit %}
 
-                        <p>{{produit.nom_produit}}</p>
+        <ul class="ListeN1">
+            <li class ="ListeN2" ><a href="produits_detail.php?id={{ element.id_produit }}">{{ element.nom_produit }}</a></li>
+            <img src"/{{element.image_produit}}" alt"">
+        </ul>
 
                         {% endfor %}
                 </article>

@@ -1,0 +1,22 @@
+            {% extends "base.twig" %}
+
+{% block main %}
+            <section>
+                <article>
+                        <h3> Résultat de la recherche </h3>
+                        {% for element in categorie %}
+
+        <ul class="ListeN1">
+            <li class ="ListeN2" ><a href="categories_detail.php?id={{ element.id_categorie }}">{{ element.nom_categorie }}</a></li>
+            <li> {{element.qte_produit}} </li>
+            <img src"/{{element.image_categorie}}" alt"">
+        </ul>
+
+                        {% endfor %}
+                </article>
+
+            </section>
+
+            {% endblock main %}
+
+

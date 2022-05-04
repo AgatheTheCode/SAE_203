@@ -1,0 +1,29 @@
+            {% extends "base.twig" %}
+
+{% block main %}
+            <section>
+                <article>
+                        <h3> Détail : {{element.nom_categorie}} </h3>
+                        {% for element in categorie %}
+
+        <ul class="ListeN1">
+            <li class ="ListeN2">{{ element.nom_categorie }}</a></li>
+            <li><img src"{{element.image_categorie}}" alt""></li>
+            <li>Categorie :{{ element.nom_categorie }} </li>
+        </ul>
+
+        <ul>
+            <h2> Produit de la categorie : {{element.nom_categorie}} </h2>
+            <li class ="ListeN2">{{ element.nom_produit }}</a></li>
+            <li><img src"{{element.image_produit}}" alt""></li>
+            <li>Note :{{ element.note_produit }} </li>
+            <li>Prix :{{ element.prix_produit }} </li>
+        </ul>
+
+                        {% endfor %}
+                </article>
+
+            </section>
+
+            {% endblock main %}
+

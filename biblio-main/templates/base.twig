@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Biblio</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<header>
+		<nav role ="naviagation">
+			<ul>
+				<li><a href={{index.href}}>{{index.nom}}</a></li>
+				{% for element in nav %}
+				<li class="menu-deroulant_cat1">
+					<a href={{element.href2}}>{{element.nom2}}</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</nav>
+	</header>
+	<main>
+		{% block main %}
+    <div class="blocknormal">
+	<div class="titre"><h1>Liste des Livres</h1></div>
+	{% for element in livres %}
+	<ul class="ListeN1">
+        <li class ="ListeN2" ><a href="livres.php?id={{ element.isbn }}">{{ element.titre }}</a></li>
+	</ul>
+		{% endfor %}
+	</div>
+
+		{% endblock %}
+
+		{% block aside %}
+		{% endblock %}
+
+	</main>
+	<footer>
+		<p>Indentifiant sur l'URL : {{ id }}</p>
+	</footer>
+</body>
+
+</html>

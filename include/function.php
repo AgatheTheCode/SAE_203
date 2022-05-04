@@ -326,54 +326,109 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 ////////////////////////////////////////////////////////////
 
-function filtre()
-//filtre
-{
-    require_once('include/config.php');
-    $pdo = connexion();
+function afficher_produit_tous($pdo){
+        // construction de la requête
+        $sql = 'select * from produit';
 
-    $filtre = [];
-
-    $sql = 'SELECT * from produit INNER JOIN categorie ON produit.id_categorie = categorie.id_categorie';
-
-    // exemple SELECT * from produit INNER JOIN categorie ON produit.id_categorie = categorie.id_categorie WHERE nom_categorie = 'sweat'; 
-        //var_dump($filtre);
-        foreach($filtre as $f)
-        {
-    if ($f['value'] == 1)
-    {
-        if ($flag == 0)
-        {
-            $sql = $sql." where id_categorie = '". $f['name']."'";
-            $flag = 1;
-        } 
-        if ($flag == 1)
-        {
-        $sql = $sql." OR id_categorie ='".$f['name']."'";
-        }
-    }
-
-    if ($f['value']== 0){
-        $sql = $sql;
-    }
-        }
-var_dump($sql);
-  // préparation et exécution de la requête
-$query = $pdo->prepare($sql);
-$query->execute();
-
-  // vérification des erreurs
+        // exécution de la requête
+        $query = $pdo->prepare($sql);
+    
+        $query->execute();
+    
         if ($query->errorCode() == '00000') {
-    // récupération des données dans un tableau
-    $tableau = $query->fetchALL(PDO::FETCH_ASSOC);
-    }
-        else {
-    echo '<p>Erreur dans la requête : ' . $query->errorInfo()[2] . '</p>';
-    $tableau = null;
-            }
-  // renvoie le tableau
-  //var_dump($tableau);
+            // récupération des données dans un tableau
+            $tableau = $query->fetchAll(PDO::FETCH_OBJ);
+        } else {
+            echo '<p>Erreur dans la requête : ' . $query->errorInfo()[2] . '</p>';
+            $tableau = null;
+        }
+    
         return $tableau;
-
-unset($pdo);
 }
+function focus_produit($pdo, $id)
+{
+    // construction de la requête
+    $sql = 'SELECT * ,categorie.nom_categorie,genre.nom_genre from produit inner join categorie on produit.id_categorie=categorie.id_categorie inner join genre on produit.id_genre=genre.id_genre where id_produit = :id;';
+
+    // exécution de la requête
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':id',$id,PDO::PARAM_INT);
+
+    $query->execute();
+
+    if ($query->errorCode() == '00000') {
+        // récupération des données dans un tableau
+        $tableau = $query->fetchAll(PDO::FETCH_OBJ);
+    } else {
+        echo '<p>Erreur dans la requête : ' . $query->errorInfo()[2] . '</p>';
+        $tableau = null;
+    }
+
+    return $tableau;
+}
+
+function focus_categorie($pdo, $id)
+{
+    // construction de la requête
+    $sql = 'SELECT *,produit.nom_produit,produit.prix_produit,produit.note_produit from categorie INNER JOIN produit on categorie.id_categorie=produit.id_categorie where categorie.id_categorie = :id;';
+
+    // exécution de la requête
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':id',$id,PDO::PARAM_INT);
+
+    $query->execute();
+
+    if ($query->errorCode() == '00000') {
+        // récupération des données dans un tableau
+        $tableau = $query->fetchAll(PDO::FETCH_OBJ);
+    } else {
+        echo '<p>Erreur dans la requête : ' . $query->errorInfo()[2] . '</p>';
+        $tableau = null;
+    }
+
+    return $tableau;
+}
+function afficher_categorie_tous($pdo){
+    // construction de la requête
+    $sql = ' SELECT *, SUM(produit.qte_produit) from categorie INNER JOIN produit ON produit.id_categorie=categorie.id_categorie GROUP BY nom_categorie';
+
+    // exécution de la requête
+    $query = $pdo->prepare($sql);
+
+    $query->execute();
+
+    if ($query->errorCode() == '00000') {
+        // récupération des données dans un tableau
+        $tableau = $query->fetchAll(PDO::FETCH_OBJ);
+    } else {
+        echo '<p>Erreur dans la requête : ' . $query->errorInfo()[2] . '</p>';
+        $tableau = null;
+    }
+    return $tableau;
+    function count_item_categorie($pdo,$sum,$id){
+
+    $sql ='SELECT SUM(qte_produit)  FROM produit where id_categorie =:id ';
+    
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':id',$id,PDO::PARAM_INT);
+    $query->bindValue(':sum',$sum,PDO::PARAM_INT);
+    
+    
+    $query->execute();
+    
+    if ($query->errorCode() == '00000') {
+        // récupération des données dans un tableau
+        $tableau = $query->fetchAll(PDO::FETCH_OBJ);
+    } 
+    else {
+        echo '<p>Erreur dans la requête : ' . $query->errorInfo()[2] . '</p>';
+        $tableau = null;
+    }
+    
+    return $tableau;
+    var_dump($tableau);
+    }
+    
+}
+
+
