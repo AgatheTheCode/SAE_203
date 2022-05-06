@@ -6,11 +6,11 @@
                         <h3> Résultat de la recherche </h3>
                         {% for element in categorie %}
 
-        <ul class="ListeN1">
-            <li class ="ListeN2" ><a href="categories_detail.php?id={{ element.id_categorie }}">{{ element.nom_categorie }}</a></li>
-            <li> {{element.qte_produit}} </li>
+        <div class="ListeN1">
+            <p class ="ListeN2" ><a href="categories_detail.php?id={{element.id_categorie}}">{{element.nom_categorie}}</a></li>
+            <p>Quantité d'articles : {{element.total_produit}} </p>
             <img src"/{{element.image_categorie}}" alt"">
-        </ul>
+        </div>
 
                         {% endfor %}
                 </article>

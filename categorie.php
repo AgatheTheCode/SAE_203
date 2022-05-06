@@ -15,8 +15,7 @@ $pdo = connexion();
 
 include('include/function.php');
 $categorie = afficher_categorie_tous($pdo);
-//count_item_categorie($pdo, $id,$sum);
-//$produit = focus_produit($pdo,$id);
+
 
 
 echo $twig->render('categorie_template.twig', [

@@ -21,3 +21,4 @@ $categorie = focus_categorie($pdo,$id);
 echo $twig->render('categories_detail_template.twig', [
   'categorie' => $categorie,
 ]);
+//var_dump($categorie);
