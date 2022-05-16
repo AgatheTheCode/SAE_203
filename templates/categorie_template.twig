@@ -3,13 +3,26 @@
 {% block main %}
             <section>
                 <article>
-                        <h3> Résultat de la recherche </h3>
+                        <h3> Nos Catégories </h3>
                         {% for element in categorie %}
 
         <div class="ListeN1">
             <p class ="ListeN2" ><a href="categories_detail.php?id={{element.id_categorie}}">{{element.nom_categorie}}</a></li>
             <p>Quantité d'articles : {{element.total_produit}} </p>
-            <img src"/{{element.image_categorie}}" alt"">
+            <img src="{{element.image_categorie}}" alt"">
+        </div>
+
+                        {% endfor %}
+                </article>
+
+                    <article>
+                        <h3> Nos Genre </h3>
+                        {% for item in genre %}
+
+        <div class="ListeN1">
+            <p class ="ListeN2" ><a href="genre_detail.php?id={{item.id_genre}}">{{item.nom_genre}}</a></li>
+            <p>Quantité d'articles : {{item.total_produit}} </p>
+            <img src="{{item.image_genre}}" alt"">
         </div>
 
                         {% endfor %}

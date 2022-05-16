@@ -4,6 +4,7 @@
 
 function admin_insert_categorie()
 {
+    require_once('include/config.php');
     $pdo = connexion();
 
     // initialisation des variables
@@ -26,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             if($stmt = $pdo->prepare($sql)){
                 $stmt->bindParam(":nom_categorie", $param_nom_categorie, PDO::PARAM_STR);
     
-                $param_description_categorie = $_POST["nom_categorie"];
+                $param_nom_categorie = $_POST["nom_categorie"];
     
                 //verification que la nouvelle categorie n'existe pas
     
@@ -348,7 +349,7 @@ function afficher_produit_tous($pdo){
 function focus_produit($pdo, $id)
 {
     // construction de la requête
-    $sql = 'SELECT * ,categorie.nom_categorie,categorie.id_categorie,genre.nom_genre,genre.id_genre from produit inner join categorie on produit.id_categorie=categorie.id_categorie inner join genre on produit.id_genre=genre.id_genre where id_produit = :id;';
+    $sql = 'SELECT * ,categorie.nom_categorie,categorie.id_categorie,genre.nom_genre,genre.id_genre from produit inner join categorie on produit.id_categorie=categorie.id_categorie inner join genre on produit.id_genre=genre.id_genre where id_produit = :id ORDER BY nom_produit;';
 
     // exécution de la requête
     $query = $pdo->prepare($sql);
@@ -370,7 +371,7 @@ function focus_produit($pdo, $id)
 function focus_categorie($pdo, $id)
 {
     // construction de la requête
-    $sql = 'SELECT *,produit.nom_produit,produit.prix_produit,produit.note_produit,produit.id_categorie from categorie INNER JOIN produit on categorie.id_categorie=produit.id_categorie having categorie.id_categorie = :id;';
+    $sql = 'SELECT *,produit.nom_produit,produit.prix_produit,produit.note_produit,produit.id_categorie from categorie INNER JOIN produit on categorie.id_categorie=produit.id_categorie having categorie.id_categorie = :id ORDER BY nom_categorie;';
 
     // exécution de la requête
     $query = $pdo->prepare($sql);
@@ -387,6 +388,31 @@ function focus_categorie($pdo, $id)
     }
 
     return $tableau;
+var_dump($tableau);
+
+}
+
+function focus_genre($pdo, $id)
+{
+    // construction de la requête
+    $sql = 'SELECT *,produit.nom_produit,produit.prix_produit,produit.note_produit,produit.id_genre from genre INNER JOIN produit on genre.id_genre=produit.id_genre having genre.id_genre = :id Order BY nom_genre;';
+
+    // exécution de la requête
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':id',$id,PDO::PARAM_INT);
+
+    $query->execute();
+
+    if ($query->errorCode() == '00000') {
+        // récupération des données dans un tableau
+        $tableau = $query->fetchAll(PDO::FETCH_OBJ);
+    } else {
+        echo '<p>Erreur dans la requête : ' . $query->errorInfo()[2] . '</p>';
+        $tableau = null;
+    }
+
+    return $tableau;
+
 }
 
 function afficher_categorie_tous($pdo){
@@ -406,9 +432,10 @@ function afficher_categorie_tous($pdo){
         $tableau = null;
     }
     return $tableau;
+
     function count_item_categorie($pdo,$sum,$id){
 
-    $stmt ='SELECT SUM(qte_produit)  FROM produit where id_categorie =:id ';
+    $stmt ='SELECT SUM(qte_produit)  FROM produit where id_categorie =:id';
     
     $query = $pdo->prepare($stmt);
     $query->bindValue(':id',$id,PDO::PARAM_INT);
@@ -431,3 +458,48 @@ function afficher_categorie_tous($pdo){
     }
     
 }
+
+function afficher_genre_tous($pdo){
+    // construction de la requête
+    //$sql = ' SELECT *, SUM(produit.qte_produit) from categorie INNER JOIN produit ON produit.id_categorie=categorie.id_categorie GROUP BY nom_categorie';
+    $sql = 'SELECT COUNT(nom_produit) AS total_produit, genre.nom_genre, genre.id_genre FROM produit INNER JOIN genre ON produit.id_genre = genre.id_genre GROUP BY nom_genre;'; 
+    // exécution de la requête
+    $query = $pdo->prepare($sql);
+
+    $query->execute();
+
+    if ($query->errorCode() == '00000') {
+        // récupération des données dans un tableau
+        $tableau = $query->fetchAll(PDO::FETCH_OBJ);
+    } else {
+        echo '<p>Erreur dans la requête : ' . $query->errorInfo()[2] . '</p>';
+        $tableau = null;
+    }
+    return $tableau;
+
+    function count_item_genre($pdo,$sum,$id){
+
+    $stmt ='SELECT SUM(qte_produit)  FROM produit where id_genre =:id order by nom_produit ';
+    
+    $query = $pdo->prepare($stmt);
+    $query->bindValue(':id',$id,PDO::PARAM_INT);
+    $query->bindValue(':sum',$sum,PDO::PARAM_INT);
+    
+    
+    $query->execute();
+    
+    if ($query->errorCode() == '00000') {
+        // récupération des données dans un tableau
+        $tableau = $query->fetchAll(PDO::FETCH_OBJ);
+    } 
+    else {
+        echo '<p>Erreur dans la requête : ' . $query->errorInfo()[2] . '</p>';
+        $tableau = null;
+    }
+    
+    return $tableau;
+    var_dump($tableau);
+    }
+    
+}
+

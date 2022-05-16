@@ -1,0 +1,30 @@
+            {% extends "base.twig" %}
+
+{% block main %}
+            <section>
+                    <article>
+                        <h3> Détail : {{genre.nom_genre}} </h3>
+    {% for element in genre %}
+
+        <div class="psteN1">
+            <p class ="psteN2">{{ element.nom_genre }}</a></p>
+            <p><img src="{{element.image_genre}}" alt=""></p>
+            <p>Genre : {{ element.nom_genre }} </p>
+            
+        </div>
+        
+
+        <div>
+            <h2> Produit de la categorie : {{element.nom_genre}} </h2>
+            <p class ="psteN2">{{ element.nom_produit }}</a></p>
+            <img src ="{{ element.image_produit }}" alt ="">
+            <p>Note : {{ element.note_produit }} </p>
+            <p>Prix : {{ element.prix_produit }} € </p>
+        </div>
+
+    {% endfor %}
+                </article>
+            </section>
+
+            {% endblock main %}
+

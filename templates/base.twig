@@ -5,14 +5,31 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/base.css">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{{ titre }}</title>
-	<link rel="stylesheet" href="css/base.css">
 	<style> @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap'); </style>
 	{% block css %}
 	{% endblock css %}
 </head>
+<wrap class ="wrapper">
+<main>
 {% block main %}
 {% endblock main %}
+</main>
+{% block footer %}
+<p>{{ footer.editer }} </p>
+<p>{{ footer.IUT}}</p>
+{% for element in nav %}
+<nav>
+            {% for item in nav %}
+                <ul>
+                    <li><a href="{{item.nav}}">{{item.nommenu}}</a></li>
+                </ul>
+            {% endfor %}
+</nav>
+{% endblock footer %}
+</wrapper>
 </php>

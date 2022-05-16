@@ -15,9 +15,11 @@ $pdo = connexion();
 
 include('include/function.php');
 $categorie = afficher_categorie_tous($pdo);
+$genre = afficher_genre_tous($pdo);
 
 
 
 echo $twig->render('categorie_template.twig', [
   'categorie' => $categorie,
+  'genre' => $genre,
 ]);
