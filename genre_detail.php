@@ -13,6 +13,7 @@ $pdo = connexion();
 
 include('include/function.php');
 $genre = focus_genre($pdo,$id);
+var_dump($genre);
 
 echo $twig->render('genre_detail_template.twig', [
   'genre'=>$genre,

@@ -418,7 +418,7 @@ function focus_genre($pdo, $id)
 function afficher_categorie_tous($pdo){
     // construction de la requête
     //$sql = ' SELECT *, SUM(produit.qte_produit) from categorie INNER JOIN produit ON produit.id_categorie=categorie.id_categorie GROUP BY nom_categorie';
-    $sql = 'SELECT COUNT(nom_produit) AS total_produit, categorie.nom_categorie, categorie.id_categorie FROM produit INNER JOIN categorie ON produit.id_categorie = categorie.id_categorie GROUP BY nom_categorie;'; 
+    $sql = 'SELECT COUNT(nom_produit) AS total_produit, categorie.image_categorie, categorie.nom_categorie, categorie.id_categorie FROM produit INNER JOIN categorie ON produit.id_categorie = categorie.id_categorie GROUP BY nom_categorie;'; 
     // exécution de la requête
     $query = $pdo->prepare($sql);
 
@@ -462,7 +462,7 @@ function afficher_categorie_tous($pdo){
 function afficher_genre_tous($pdo){
     // construction de la requête
     //$sql = ' SELECT *, SUM(produit.qte_produit) from categorie INNER JOIN produit ON produit.id_categorie=categorie.id_categorie GROUP BY nom_categorie';
-    $sql = 'SELECT COUNT(nom_produit) AS total_produit, genre.nom_genre, genre.id_genre FROM produit INNER JOIN genre ON produit.id_genre = genre.id_genre GROUP BY nom_genre;'; 
+    $sql = 'SELECT COUNT(nom_produit) AS total_produit, genre.image_genre ,genre.nom_genre, genre.id_genre FROM produit INNER JOIN genre ON produit.id_genre = genre.id_genre GROUP BY nom_genre;'; 
     // exécution de la requête
     $query = $pdo->prepare($sql);
 
@@ -501,5 +501,22 @@ function afficher_genre_tous($pdo){
     var_dump($tableau);
     }
     
+}
+
+function random_produits($pdo)
+{
+    $sql ='SELECT * FROM `produit` ORDER BY RAND() LIMIT 9';
+    $query = $pdo->prepare($sql);
+
+    $query->execute();
+
+    if ($query->errorCode() == '00000') {
+        // récupération des données dans un tableau
+        $tableau = $query->fetchAll(PDO::FETCH_OBJ);
+    } else {
+        echo '<p>Erreur dans la requête : ' . $query->errorInfo()[2] . '</p>';
+        $tableau = null;
+    }
+    return $tableau;    
 }
 

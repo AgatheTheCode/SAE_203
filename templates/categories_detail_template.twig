@@ -3,17 +3,17 @@
 {% block main %}
             <section>
                 <article>
+    {% for categorie in categorie %}
                         <h3> Détail : {{categorie.nom_categorie}} </h3>
-    {% for element in categorie %}
-
         <div class="psteN1">
-            <p class ="psteN2">{{ element.nom_categorie }}</a></p>
-            <p><img src="{{element.image_categorie}}" alt=""></p>
-            <p>Categorie : {{ element.nom_categorie }} </p>
+            <h3 class ="psteN2">{{ categorie.nom_categorie }}</a></h3>
+            <p><img src="{{categorie.image_categorie}}" alt=""></p>
+            <p>Categorie : {{ categorie.nom_categorie }} </p>
             
         </div>
+        {% endfor %}
         
-
+   {% for element in categorie %}
         <div>
             <h2> Produit de la categorie : {{ element.nom_categorie }} </h2>
             <p class ="psteN2">{{ element.nom_produit }}</a></p>

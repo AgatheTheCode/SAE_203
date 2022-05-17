@@ -1,9 +1,61 @@
 /*all*/
+@keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
 
 :root {
-    font-family: Raleway;
-    width: 960px;
+    width: 1440px;
     margin: auto;
+    background: rgb(172,82,172);
+    background: linear-gradient(149deg, rgba(172,82,172,1) 0%, rgba(252,180,13,1) 35%, rgba(255,0,248,1) 100%);
+    color :white;
+}
+.dejavu{
+    -webkit-animation: mover 2s infinite  alternate;
+    animation: mover 2s infinite  alternate;
+}
+
+.alogo{
+    background-color: rgba(255, 255, 255, 0);
+    padding: 0;
+    margin: 0;
+    
+}
+*{
+    color :white;
+}
+
+.link{
+    color: white;
+    background-color:rgba(128, 0, 248, 0.568);
+    border-radius: 25px;
+    margin : 20px;
+    padding :15px;
+    font-family: 'Press Start 2P', cursive;
+}
+.link:link{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+.link:visited{
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+
+}
+.link:hover{
+    text-decoration: none;
+    color: white;
+    text-decoration: underline;
+
+}
+.link:active{
+    text-decoration: none;
+    color: red;
+    text-decoration: double;
+
 }
 
 
@@ -11,19 +63,80 @@
 @font-face {
     font-family: 'Raleway', sans-serif;
     src: url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+    
+}
+.wrapper{
+    background-color: rgb(51, 51, 51);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.titre{
+    margin : 10px;
+    padding :10px;
+    display: flex;
+    justify-content: space-betweens;
+}
+.titre h1{
+    font-size: 500%;
+}
+.titre h2{
+    font-size: 200%;
+}
+.titre div{
+    display: flex;
+    flex-direction: Row;
+    justify-content: center;
+    align-items: center;
+}
+.titre div div{
+    margin : 10px;
+    padding :10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.logo{
+    display: flex;
+    border-radius:15%;
+    width: 400px;
+    height: auto;
+}
+nav ul{
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+.link:hover{
+    -webkit-box-shadow: 0px 0px 36px 12px #DC00FF; 
+    box-shadow: 0px 0px 36px 12px #DC00FF;
+}
+.linkSpe img:hover{
+    -webkit-box-shadow: 0px 0px 36px 12px #DC00FF; 
+    box-shadow: 0px 0px 36px 12px #DC00FF;
+}
+.linkSpe{
+    background-color: rgba(252, 180, 13, 0);
+}
+nav li{
+    margin : 5px;
+    padding :10px;
+    animation: mover 2s infinite  alternate;
+}
+
+nav li:hover{
+    animation: mover 0s;
 }
 
 body{ 
-    font: 14px sans-serif; 
+
+    font: 14px sans-serif;
+    background-color: transparent;
 }
-.wrapper{ 
-    display: flex;
-    width: 360px; 
-    padding: 20px;
-    justify-content: center;
-    align-content: center;
-    background-color: blue ;
-}
-.S1{
-    background-color: aqua;
+main{
+    margin: 15px;
+    padding: 10px;
 }

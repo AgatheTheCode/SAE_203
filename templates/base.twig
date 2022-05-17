@@ -2,20 +2,46 @@
 <php lang="fr">
 
 <head>
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-		<link rel="stylesheet" href="../css/reset.css">
-		<link rel="stylesheet" href="../css/base.css">
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{{ titre }}</title>
-	<style> @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap'); </style>
 	{% block css %}
+	<meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/base.css">
+		<link rel="stylesheet" href="css/cat.css">
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>MegaNerd</title>
+	
 	{% endblock css %}
 </head>
 <wrap class ="wrapper">
 <main>
+    <body>
+        <header>
+            <div class="titre">
+                <div>
+                    <a class="alogo" href="index.php"><img class="logo" src="{{index.logo}}" alt="logo"></a>
+                    <div>
+                    <h1> {{index.titre}} </h1>
+                    <h2>{{index.soustitre}}</h2>
+                    </div>
+                </div>
+                
+            </div>
+            <nav>
+            
+                <ul>
+                {% for item in nav %}
+                    <li><a class="link" href="{{item.nav}}">{{item.nommenu}}</a></li>
+                {% endfor %}
+                    <li><a class="linkSpe" href="page-admin.php"><img class="dejavu" src="image/dejavu.png" alt ""><a/>
+                </ul>
+               
+            </nav>
+        </header>
 {% block main %}
 {% endblock main %}
 </main>
@@ -26,10 +52,11 @@
 <nav>
             {% for item in nav %}
                 <ul>
-                    <li><a href="{{item.nav}}">{{item.nommenu}}</a></li>
+                    <li><a class="link" href="{{item.nav}}">{{item.nommenu}}</a></li>
                 </ul>
             {% endfor %}
 </nav>
+{% endfor %}
 {% endblock footer %}
 </wrapper>
 </php>
