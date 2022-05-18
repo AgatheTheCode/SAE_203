@@ -1,48 +1,38 @@
 {% extends "base.twig" %}
-
 {% block main %}
             <section>
-                
-                        <h3> Nos Catégories </h3>
-                        <article class="cateart">
+                <h3> Nos Catégories </h3>
+                    <article class="cateart">
                         {% for element in categorie %}
-
-        <div class="ListeN1">
-            <h4>{{element.nom_categorie}}</h4>
- 
-            <div>
-            <a href="categories_detail.php?id={{element.id_categorie}}">
-                <img src="{{element.image_categorie}}" alt"">
-            </a>
-            </div>
-            <p>Quantité d'articles : {{element.total_produit}} </p>
-        </div>
-
+                        <div class="ListeN1">
+                            <h4>{{element.nom_categorie}}</h4>
+                                <div>
+                                    <a href="categories_detail.php?id={{element.id_categorie}}">
+                                    <img src="{{element.image_categorie}}" alt"">
+                                    </a>
+                                </div>
+                            <p>Quantité d'articles : {{element.total_produit}} </p>
+                        </div>
                         {% endfor %}
-                </article>
-                        <h3> Nos Genre </h3>
-                        <article class="cateart">
+                    </article>
+                <h3> Nos Genre </h3>
+                    <article class="cateart">
                         {% for item in genre %}
-
-        <div class="ListeN1">
-        <h4>{{item.nom_genre}}</li> </h4>
-            
-            <div>
-            <a href="genre_detail.php?id={{item.id_genre}}">
-                <img src="{{item.image_genre}}" alt"">
-            </a>
-            </div>
-            <p>Quantité d'articles : {{item.total_produit}} </p>
-        </div>
-
+                            <div class="ListeN1">
+                                <h4>{{item.nom_genre}}</h4>
+                                <div>
+                                    <a href="genre_detail.php?id={{item.id_genre}}">
+                                    <img src="{{item.image_genre}}" alt"">
+                                    </a>
+                                </div>
+                            <p>Quantité d'articles : {{item.total_produit}} </p>
+                            </div>
                         {% endfor %}
                 </article>
-
             </section>
-                        {% block footer %}
+            {% block footer %}
             {% endblock footer %}
-
-            {% endblock main %}
+{% endblock main %}
 
 
 

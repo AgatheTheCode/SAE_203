@@ -1,14 +1,5 @@
 <?php
 // Initialize the session
-//plus fonctionnelle
-//plus fonctionnelle
-//plus fonctionnelle
-//plus fonctionnelle
-//plus fonctionnelle
-//plus fonctionnelle
-//plus fonctionnelle
-//plus fonctionnelle
-
 session_start();
  
 // Unset all of the session variables

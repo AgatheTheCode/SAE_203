@@ -1,28 +1,26 @@
             {% extends "base.twig" %}
 
 {% block main %}
-            <section>
-                <article>
-    {% for categorie in categorie %}
-                        <h3> Détail : {{categorie.nom_categorie}} </h3>
-        <div class="psteN1">
-            <h3 class ="psteN2">{{ categorie.nom_categorie }}</a></h3>
-            <p><img src="{{categorie.image_categorie}}" alt=""></p>
-            <p>Categorie : {{ categorie.nom_categorie }} </p>
-            
-        </div>
-        {% endfor %}
-        
-   {% for element in categorie %}
-        <div>
-            <h2> Produit de la categorie : {{ element.nom_categorie }} </h2>
-            <p class ="psteN2">{{ element.nom_produit }}</a></p>
-            <img src="{{ element.image_produit }}" alt="">
-            <p>Note : {{ element.note_produit }} </p>
-            <p>Prix : {{ element.prix_produit }} </p>
-        </div>
-
-    {% endfor %}
-                </article>
-            {% endblock main %}
+    <section>
+        <article>
+            {% for categorie in categorie %}
+            <h3> Détail : {{categorie.nom_categorie}} </h3>
+                <div class="psteN1">
+                    <h3 class ="psteN2">{{ categorie.nom_categorie }}</a></h3>
+                    <p><img src="{{categorie.image_categorie}}" alt=""></p>
+                    <p>Categorie : {{ categorie.nom_categorie }} </p>
+                </div>
+            {% endfor %}
+            {% for element in categorie %}
+                <div>
+                    <h2> Produit de la categorie : {{ element.nom_categorie }} </h2>
+                    <p class ="psteN2">{{ element.nom_produit }}</a></p>
+                    <img src="{{ element.image_produit }}" alt="">
+                    <p>Note : {{ element.note_produit }} </p>
+                    <p>Prix : {{ element.prix_produit }} </p>
+                </div>
+            {% endfor %}
+        </article>
+    </section>
+{% endblock main %}
 

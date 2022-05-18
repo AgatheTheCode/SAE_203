@@ -3,60 +3,69 @@
 
 <head>
 	{% block css %}
-	<meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	    <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/base.css">
 		<link rel="stylesheet" href="css/cat.css">
-        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/index.css">        
+        <link rel="stylesheet" href="css/produit.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>MegaNerd</title>
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	            <title>MegaNerd</title>
 	
 	{% endblock css %}
 </head>
-<wrap class ="wrapper">
-<main>
     <body>
-        <header>
-            <div class="titre">
-                <div>
-                    <a class="alogo" href="index.php"><img class="logo" src="{{index.logo}}" alt="logo"></a>
-                    <div>
-                    <h1> {{index.titre}} </h1>
-                    <h2>{{index.soustitre}}</h2>
+        <wrap class ="wrapper">
+            {% block header %}
+                <header>
+                    <div class="titre">
+                        <div>
+                            <a class="alogo" href="index.php"><img class="logo" src="{{index.logo}}" alt="logo"></a>
+                                <div class="nomsite">
+                                    <h1 > {{index.titre}} </h1>
+                                    <div class = "anime">
+                                        <h2>{{index.soustitre}}</h2>
+                                    </div>
+                                </div>
+                        </div>
                     </div>
-                </div>
-                
+                <nav class="navmain">
+                    <ul>
+                        {% for item in nav %}
+                        <li><a class="link" href="{{item.nav}}">{{item.nommenu}}</a></li>
+                        {% endfor %}
+                        <li><a class="linkSpe" href="page-admin.php"><img class="dejavu" src="image/dejavu.png" alt ""><a/>
+                    </ul>
+                </nav>
+                </header>
+            {% endblock header %}
+        <main>
+            {% block main %}
+            {% endblock main %}
+        </main>
+        {% block footer %}
+        <footer>*
+            <div class ="agathe">
+                <p>{{ footer.editer }} </p>
+                <p class ="barre">{{ footer.editer2 }} </p>
+                <a href="https://github.com/AgatheTheCode/">
+                <p class="neon"> {{ footer.editer3 }} </p>
+                </a>
             </div>
-            <nav>
-            
-                <ul>
-                {% for item in nav %}
-                    <li><a class="link" href="{{item.nav}}">{{item.nommenu}}</a></li>
-                {% endfor %}
-                    <li><a class="linkSpe" href="page-admin.php"><img class="dejavu" src="image/dejavu.png" alt ""><a/>
-                </ul>
-               
-            </nav>
-        </header>
-{% block main %}
-{% endblock main %}
-</main>
-{% block footer %}
-<p>{{ footer.editer }} </p>
-<p>{{ footer.IUT}}</p>
-{% for element in nav %}
-<nav>
-            {% for item in nav %}
-                <ul>
-                    <li><a class="link" href="{{item.nav}}">{{item.nommenu}}</a></li>
-                </ul>
-            {% endfor %}
-</nav>
-{% endfor %}
-{% endblock footer %}
-</wrapper>
+                    <nav class="navfooter">
+                        {% for item in nav %}
+                            <ul>
+                                <li><a class="footerlink" href="{{item.nav}}">{{item.nommenu}}</a></li>
+                            </ul>
+                        {% endfor %}
+                    </nav>
+        </footer>
+        {% endblock footer %}
+        </div>
+    </body>
 </php>

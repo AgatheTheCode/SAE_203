@@ -15,6 +15,12 @@ include('include/function.php');
 $genre = focus_genre($pdo,$id);
 var_dump($genre);
 
+include('include/index_data.php');
+
+
 echo $twig->render('genre_detail_template.twig', [
   'genre'=>$genre,
+  'index' => $index,
+  'nav' => $nav,
+  'footer' => $footer,
 ]);

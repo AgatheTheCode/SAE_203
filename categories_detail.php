@@ -14,15 +14,16 @@ include('include/config.php');
 $pdo = connexion();
 
 include('include/function.php');
-//$produit = afficher_produit_tous($pdo);
 $categorie = focus_categorie($pdo,$id);
 $genre = focus_genre($pdo,$id);
-//var_dump($categorie);
 
+include('include/index_data.php');
 
 
 
 echo $twig->render('categories_detail_template.twig', [
   'categorie' => $categorie,
+  'index' => $index,
+  'nav' => $nav,
+  'footer' => $footer,
 ]);
-//var_dump($categorie);

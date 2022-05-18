@@ -1,17 +1,6 @@
 <?php
 
 
-
-
-//plus fonctionnelle
-//plus fonctionnelle
-//plus fonctionnelle
-//plus fonctionnelle
-//plus fonctionnelle
-//plus fonctionnelle
-//plus fonctionnelle
-//plus fonctionnelle
-
 //Include config file
 include('include/twig.php');
 $twig = init_twig();
@@ -23,7 +12,12 @@ include_once('include/function.php');
 admin_insert_categorie();
 
 
+include('include/index_data.php');
+
+
 echo $twig->render('page-admin.twig', [
     'cat' => $cat,
- 
+    'index' => $index,
+    'nav' => $nav,
+    'footer' => $footer,
 ]);

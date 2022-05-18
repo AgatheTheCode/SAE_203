@@ -1,24 +1,23 @@
-            {% extends "base.twig" %}
-
+{% extends "base.twig" %}
 {% block main %}
-            <section>
-                <article>
-                        <h3> Détail : {{produit.nom_produit}} </h3>
-                        {% for element in produit %}
-
-        <ul class="ListeN1">
-            <li class ="ListeN2">{{ element.nom_produit }}</a></li>
-            <li><img src="{{element.image_produit}}.jpg" alt=""></li>
-            <li>Genre :{{ element.nom_genre }} </li>
-            <li>Categorie :{{ element.nom_categorie }} </li>
-            <li>Note :{{ element.note }} </li>
-            <li>Prix :{{ element.prix_produit }} </li>
-        </ul>
-
-                        {% endfor %}
-                </article>
-
-            </section>
-
-            {% endblock main %}
+<section>
+    <article>
+        <h3> Détail : {{produit.nom_produit}} </h3>
+        <div class="divproddet">
+        {% for element in produit %}
+            <ul class="detail_Produit">
+                <li>{{ element.nom_produit }}</a></li>
+                <li><img src="{{element.image_produit}}.jpg" alt=""></li>
+                <li>Genre :{{ element.nom_genre }} </li>
+                <li>Categorie :{{ element.nom_categorie }} </li>
+                <li>Note :{{ element.note }} </li>
+                <li>Prix :{{ element.prix_produit }} </li>
+                <li> Référence : 000 {{ element.id_categorie }} {{ element.id_genre}} {{ element.id_produit }}</li>
+                <li>Quantité en stock :{{ element.qte_produit }} </li>
+            </ul>
+        {% endfor %}
+        </div>
+    </article>
+</section>
+{% endblock main %}
 

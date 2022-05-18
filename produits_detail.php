@@ -16,8 +16,12 @@ $pdo = connexion();
 include('include/function.php');
 //$produit = afficher_produit_tous($pdo);
 $produit = focus_produit($pdo,$id);
+include('include/index_data.php');
 
 
 echo $twig->render('produits_detail_template.twig', [
   'produit' => $produit,
+  'index' => $index,
+  'nav' => $nav,
+  'footer' => $footer,
 ]);

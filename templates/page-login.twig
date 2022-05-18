@@ -1,16 +1,9 @@
 {% extends "base.twig" %}
-
 {% block main %}
-<!DOCTYPE html>
-<body>
-
-    <div class="wrapper">
+<section>
+    <article>
         <h2>{{Login.h2}}</h2>
-            <pre> {{dump(Login)}} </pre>
         <p>{{Login.info}}</p>
-
-        {{Login.phperr}}
-
         <form {{ Login.form }}>
             <div class="form-group">
                 <label>Pseudo</label>
@@ -27,7 +20,7 @@
             </div>
             <p>Don't have an account? <a href="creation_compte.php">Sign up now</a>.</p>
         </form>
-    </div>
-</body>
+    </article>
+</section>
 {% endblock main %}
 

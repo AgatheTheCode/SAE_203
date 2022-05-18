@@ -17,9 +17,13 @@ include('include/function.php');
 $categorie = afficher_categorie_tous($pdo);
 $genre = afficher_genre_tous($pdo);
 
+include('include/index_data.php');
 
 
 echo $twig->render('categorie_template.twig', [
+  'index' => $index,
+  'nav' => $nav,
+  'footer' => $footer,
   'categorie' => $categorie,
   'genre' => $genre,
 ]);
