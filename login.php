@@ -1,42 +1,25 @@
+//fonctionnel mais inutile je n'aurais pas le temps de créer un système de session et de panier cohérent
+
 <?php
-// Initialize the session
-session_start();
- 
-// Check if the user is already logged in, if yes then redirect him to welcome page
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: welcome.php");
-    exit;
-}
- 
 // Include config file
 require_once('include/config.php');
 $pdo = connexion();
  
 // Define variables and initialize with empty values
-$username = $password = "";
-$username_err = $password_err = $login_err = "";
+$username = $password = $confirm_password = "";
+$username_err = $password_err = $confirm_password_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
-    // Check if username is empty
+    // Validate username
     if(empty(trim($_POST["pseudo_client"]))){
-        $username_err = "Entrez votre pseudo.";
+        $username_err = "Entrez un pseudo.";
+    } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["pseudo_client"]))){
+        $username_err = "Un nom d'utilisateur ne peut-être composer que de lettres, chiffres et underscores";
     } else{
-        $username = trim($_POST["pseudo_client"]);
-    }
-    
-    // Check if password is empty
-    if(empty(trim($_POST["mdp"]))){
-        $password_err = "Entrez votre mot de passe.";
-    } else{
-        $password = trim($_POST["mdp"]);
-    }
-    
-    // Validate credentials
-    if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT id_client, pseudo_client, mdp_client FROM client WHERE pseudo_client = :pseudo_client";
+        $sql = "SELECT id_client FROM client WHERE pseudo_client = :pseudo_client";
         
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -47,32 +30,59 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             // Attempt to execute the prepared statement
             if($stmt->execute()){
-                // Check if username exists, if yes then verify password
                 if($stmt->rowCount() == 1){
-                    if($row = $stmt->fetch()){
-                        $id = $row["id_client"];
-                        $username = $row["pseudo_client"];
-                        $hashed_password = $row["mdp_client"];
-                        if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
-                            session_start();
-                            
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id_client"] = $id;
-                            $_SESSION["pseudo_client"] = $username;                            
-                            
-                            // Redirect user to welcome page
-                            header("location: welcome.php");
-                        } else{
-                            // Password is not valid, display a generic error message
-                            $login_err = "Invalid username or password.";
-                        }
-                    }
+                    $username_err = "Ce pseudo est déjà utilisé.";
                 } else{
-                    // Username doesn't exist, display a generic error message
-                    $login_err = "Invalid username or password.";
+                    $username = trim($_POST["pseudo_client"]);
                 }
+            } else{
+                echo "Oops! Promis c'est pas de ma faute !.";
+            }
+
+            // Close statement
+            unset($stmt);
+        }
+    }
+    
+    // Validate password
+    if(empty(trim($_POST["mdp_client"]))){
+        $password_err = "Entrez votre mot de passe.";     
+    } elseif(strlen(trim($_POST["mdp_client"])) < 6){
+        $password_err = "Le mot de passe doit faire 6 charactères.";
+    } else{
+        $password = trim($_POST["mdp_client"]);
+    }
+    
+    // Validate confirm password
+    if(empty(trim($_POST["confirm_mdp_client"]))){
+        $confirm_password_err = "Veuillez confirmer votre mot de passe.";     
+    } else{
+        $confirm_password = trim($_POST["confirm_mdp_client"]);
+        if(empty($password_err) && ($password != $confirm_password)){
+            $confirm_password_err = "Les mots de passes ne correspondent pas.";
+    }
+    
+    // Check input errors before inserting in database
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+        
+        // Prepare an insert statement
+        $sql = "INSERT INTO client (pseudo_client, mdp_client) VALUES (:pseudo_client, :mdp_client)";
+
+        if($stmt = $pdo->prepare($sql)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":pseudo_client", $param_username, PDO::PARAM_STR);
+            $stmt->bindParam(":mdp_client", $param_password, PDO::PARAM_STR);
+            
+            // Set parameters
+            $param_username = $username;
+            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            //password_hash hash et "sale" le mot de passe ce qui permet d'avoir des résultats de hash différent même si deux 
+            //clients ont le même mdp
+            
+            // Attempt to execute the prepared statement
+            if($stmt->execute()){
+                // Redirect to login page
+                header("location: login.php");
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             }
@@ -84,14 +94,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Close connection
     unset($pdo);
-}
+}}
 ?>
  
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body{ font: 14px sans-serif; }
@@ -100,15 +110,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body>
     <div class="wrapper">
-        <h2>Login</h2>
-        <p>Please fill in your credentials to login.</p>
-
-        <?php 
-        if(!empty($login_err)){
-            echo '<div class="alert alert-danger">' . $login_err . '</div>';
-        }        
-        ?>
-
+        <h2>Enregistrement de compte</h2>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
                 <label>Pseudo</label>
@@ -116,15 +118,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="invalid-feedback"><?php echo $username_err; ?></span>
             </div>    
             <div class="form-group">
-                <label>Mot de Passe</label>
-                <input type="password" name="mdp" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                <label>Mot de passe</label>
+                <input type="password" name="mdp_client" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
+                <label>Confirmer le mot de passe</label>
+                <input type="password" name="confirm_mdp_client" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>">
+                <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
             </div>
-            <p>Don't have an account? <a href="connexion.php">Sign up now</a>.</p>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="reset" class="btn btn-secondary ml-2" value="Reset">
+            </div>
+            <p>Déjà un compte? <a href="login.php">Connectez-vous !</a></p>
         </form>
-    </div>
+    </div>    
 </body>
 </html>

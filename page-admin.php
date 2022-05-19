@@ -1,3 +1,5 @@
+// Je n'arrive pas a faire fonctionner le code en mode "propre" [twig/function...]
+
 <?php
 // Include config file
 include('include/twig.php');
@@ -19,9 +21,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(empty($_POST["nom_categorie"])){
             $nom_categorie_err = "Nom invalide";
         } 
-       /* elseif(!preg_match('/^[a-zA-Z0-9_]+$/', ($_POST['description_categorie']))){
+       elseif(!preg_match('/^[a-zA-Z0-9_]+$/', ($_POST['description_categorie']))){
             $description_categorie_err="Une description de categorie ne peut-être composer que de lettres, chiffres et underscores";
-        }*/
+        }
         else{
             //requête ajout de la description
             $sql = "SELECT nom_categorie FROM categorie WHERE nom_categorie = :nom_categorie";
@@ -49,9 +51,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(empty($_POST["description_categorie"])){
             $description_categorie_err = "Description invalide";
         } 
-       /* elseif(!preg_match('/^[a-zA-Z0-9_]+$/', ($_POST['description_categorie']))){
+       elseif(!preg_match('/^[a-zA-Z0-9_]+$/', ($_POST['description_categorie']))){
             $description_categorie_err="Une description de categorie ne peut-être composer que de lettres, chiffres et underscores";
-        }*/
+        }
         else{
             //requête ajout de la description
             $sql = "SELECT description_categorie FROM categorie WHERE description_categorie = :description_categorie";
@@ -79,9 +81,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($_POST["image_categorie"])){
         $image_categorie_err = "Image invalide";
     } 
-    /*elseif(!preg_match('/^[a-zA-Z0-9_]+$/', ($_POST['image_categorie']))){
+    elseif(!preg_match('/^[a-zA-Z0-9_]+$/', ($_POST['image_categorie']))){
         $image_categorie_err="Une description de categorie ne peut-être composer que de lettres, chiffres et underscores";
-    }*/
+    }
     else{
         //requête ajout de la description
         $sql = "SELECT image_categorie FROM categorie WHERE image_categorie = :image_categorie";
@@ -133,29 +135,50 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
         unset($pdo);
     }
+}
 
-
-echo $twig->render('base.twig', [
-
-
-
-]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Configuration Admin</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<<head>
 
-    
-    <style>
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding: 20px; }
-    </style>
+	    <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/base.css">
+		<link rel="stylesheet" href="css/cat.css">
+        <link rel="stylesheet" href="css/index.css">        
+        <link rel="stylesheet" href="css/produit.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	            <title>MegaNerd</title>
 
-    
 </head>
+    <body>
+        <wrap class ="wrapper">
+
+                <header>
+                    <div class="titre">
+                        <div>
+                            <a class="alogo" href="index.php"><img class="logo" src="image/logo.jpg" alt="logo"></a>
+                                <div class="nomsite">
+                                    <h1> Meganerd</h1>
+                                    <div class = "anime">
+                                        <h2>Page Administration : attention aux bétises</h2>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                <nav class="navmain">
+                    <ul>
+                        <li><a class="link" href="index.php">retour au menu</a></li>
+                        <li><a class="linkSpe" href="page-admin.php"><img class="dejavu" src="image/dejavu.png" alt ""><a/>
+                    </ul>
+                </nav>
+                </header>
 <body>
     <div class="wrapper">
         <h2>Ajouter une catégorie</h2>
@@ -176,11 +199,10 @@ echo $twig->render('base.twig', [
                 <span class="invalid-feedback"><?php echo $image_categorie_err; ?></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-                <input type="reset" class="btn btn-secondary ml-2" value="Reset">
+            <div class="form-groupB">
+                    <input type="submit" class="btn_envoie" value="Submit">
+                    <input type="reset" class="btn_cancel" value="Reset">
             </div>
-        </form>
     </div>    
 </body>
 </html>

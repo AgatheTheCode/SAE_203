@@ -1,18 +1,71 @@
 <!DOCTYPE php>
 <php lang="fr">
-<!--
-	Ce fichier php sert de base à tous les modèles en héritant.
-	Il contient les éléments qui seront présents sur toutes les pages du site.
-	En particulier les entêtes php, les header et footer et éventuellement le menu principal
--->
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{{ titre }}</title>
-	<link rel="stylesheet" href="/base.css">
-	<style> @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap'); </style>
 	{% block css %}
+	    <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/base.css">
+		<link rel="stylesheet" href="css/cat.css">
+        <link rel="stylesheet" href="css/index.css">        
+        <link rel="stylesheet" href="css/produit.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	            <title>MegaNerd</title>
+	
 	{% endblock css %}
 </head>
+    <body>
+        <wrap class ="wrapper">
+            {% block header %}
+                <header>
+                    <div class="titre">
+                        <div>
+                            <a class="alogo" href="index.php"><img class="logo" src="{{index.logo}}" alt="logo"></a>
+                                <div class="nomsite">
+                                    <h1 > {{index.titre}} </h1>
+                                    <div class = "anime">
+                                        <h2>{{index.soustitre}}</h2>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                <nav class="navmain">
+                    <ul>
+                        {% for item in nav %}
+                        <li><a class="link" href="{{item.nav}}">{{item.nommenu}}</a></li>
+                        {% endfor %}
+                        <li><a class="linkSpe" href="page-admin.php"><img class="dejavu" src="image/dejavu.png" alt ""><a/>
+                    </ul>
+                </nav>
+                </header>
+            {% endblock header %}
+        <main>
+            {% block main %}
+            {% endblock main %}
+        </main>
+        {% block footer %}
+        <footer>
+            <div class ="agathe">
+                <p>{{ footer.editer }} </p>
+                <p class ="barre">{{ footer.editer2 }} </p>
+                <a href="https://github.com/AgatheTheCode/">
+                <p class="neon"> {{ footer.editer3 }} </p>
+                </a>
+            </div>
+                    <nav class="navfooter">
+                        {% for item in nav %}
+                            <ul>
+                                <li><a class="footerlink" href="{{item.nav}}">{{item.nommenu}}</a></li>
+                            </ul>
+                        {% endfor %}
+                    </nav>
+        </footer>
+        {% endblock footer %}
+        </div>
+    </body>
 </php>
