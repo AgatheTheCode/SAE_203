@@ -2,7 +2,7 @@
 
 function connexion()
 {
-  $pdo = new PDO('mysql:host=localhost;dbname=meganerd_bdd;charset=utf8', 'root', '');
+  $pdo = new PDO('mysql:host=tp2.iha.unistra.fr;dbname=dufourj_meganerd;charset=utf8', 'dufourj', 'Joseph23');
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 
   if ($pdo) {

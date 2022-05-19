@@ -13,12 +13,13 @@ $pdo = connexion();
 
 include('include/function.php');
 $genre = focus_genre($pdo,$id);
-var_dump($genre);
+$genre_det = select_genre($pdo,$id);
 
 include('include/index_data.php');
 
 
 echo $twig->render('genre_detail_template.twig', [
+  'genre_det' => $genre_det,
   'genre'=>$genre,
   'index' => $index,
   'nav' => $nav,

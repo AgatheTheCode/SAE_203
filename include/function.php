@@ -17,9 +17,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         if(empty($_POST["nom_categorie"])){
             $nom_categorie_err = "Nom invalide";
         } 
-       /* elseif(!preg_match('/^[a-zA-Z0-9_]+$/', ($_POST['description_categorie']))){
+        elseif(!preg_match('/^[a-zA-Z0-9_]+$/', ($_POST['description_categorie']))){
             $description_categorie_err="Une description de categorie ne peut-être composer que de lettres, chiffres et underscores";
-        }*/
+        }
         else{
             //requête ajout de la description
             $sql = "SELECT nom_categorie FROM categorie WHERE nom_categorie = :nom_categorie";
@@ -47,9 +47,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         if(empty($_POST["description_categorie"])){
             $description_categorie_err = "Description invalide";
         } 
-       /* elseif(!preg_match('/^[a-zA-Z0-9_]+$/', ($_POST['description_categorie']))){
+        elseif(!preg_match('/^[a-zA-Z0-9_]+$/', ($_POST['description_categorie']))){
             $description_categorie_err="Une description de categorie ne peut-être composer que de lettres, chiffres et underscores";
-        }*/
+        }
         else{
             //requête ajout de la description
             $sql = "SELECT description_categorie FROM categorie WHERE description_categorie = :description_categorie";
@@ -371,7 +371,7 @@ function focus_produit($pdo, $id)
 function focus_categorie($pdo, $id)
 {
     // construction de la requête
-    $sql = 'SELECT *,produit.nom_produit,produit.prix_produit,produit.note_produit,produit.id_categorie from categorie INNER JOIN produit on categorie.id_categorie=produit.id_categorie having categorie.id_categorie = :id ORDER BY nom_categorie;';
+    $sql = 'SELECT *,produit.nom_produit,produit.prix_produit,produit.note_produit,produit.id_categorie from categorie INNER JOIN produit on categorie.id_categorie=produit.id_categorie WHERE categorie.id_categorie = :id ORDER BY nom_categorie;';
 
     // exécution de la requête
     $query = $pdo->prepare($sql);
@@ -520,3 +520,39 @@ function random_produits($pdo)
     return $tableau;    
 }
 
+function select_genre($pdo,$id)
+{
+    
+    $sql ='SELECT * FROM genre WHERE id_genre =:id';
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':id',$id,PDO::PARAM_INT);
+
+    $query->execute();
+
+    if ($query->errorCode() == '00000') {
+        // récupération des données dans un tableau
+        $tableau = $query->fetchAll(PDO::FETCH_OBJ);
+    } else {
+        echo '<p>Erreur dans la requête : ' . $query->errorInfo()[2] . '</p>';
+        $tableau = null;
+    }
+    return $tableau;    
+}
+function select_categorie($pdo,$id)
+{
+    $sql ='SELECT * FROM categorie WHERE id_categorie =:id';
+    //$sql ='SELECT *,produit.id_categorie, produit.id_genre, produit.prix_produit, produit.nom_produit,produit.desc_produit,produit.qte_produit FROM categorie INNER JOIN produit on produit.id_categorie = categorie.id_categorie WHERE categorie.id_categorie =:id';
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':id',$id,PDO::PARAM_INT);
+
+    $query->execute();
+
+    if ($query->errorCode() == '00000') {
+        // récupération des données dans un tableau
+        $tableau = $query->fetchAll(PDO::FETCH_OBJ);
+    } else {
+        echo '<p>Erreur dans la requête : ' . $query->errorInfo()[2] . '</p>';
+        $tableau = null;
+    }
+    return $tableau;    
+}

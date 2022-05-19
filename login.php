@@ -1,3 +1,5 @@
+//fonctionnel mais inutile je n'aurais pas le temps de créer un système de session et de panier cohérent
+
 <?php
 // Include config file
 require_once('include/config.php');

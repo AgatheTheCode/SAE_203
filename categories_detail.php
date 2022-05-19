@@ -15,13 +15,15 @@ $pdo = connexion();
 
 include('include/function.php');
 $categorie = focus_categorie($pdo,$id);
-$genre = focus_genre($pdo,$id);
+$categorie_det = select_categorie($pdo,$id);
 
 include('include/index_data.php');
+//var_dump($categorie);
 
 
 
 echo $twig->render('categories_detail_template.twig', [
+  'categorie_det' => $categorie_det,
   'categorie' => $categorie,
   'index' => $index,
   'nav' => $nav,
